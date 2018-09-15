@@ -1,12 +1,3 @@
-/*input.toggleFullscreen=function(evt,el,state)
-{
-	const
-	paneDom=util.findTarget(el,'.pane'),
-	pane=state.panes[paneDom.id],
-	{fullscreen}=pane
-	pane.fullscreen=!fullscreen
-	util.toggleClass(paneDom,'fullscreen')
-}*/
 const
 config={},
 output={},
@@ -35,7 +26,19 @@ function input(el,type)
 		input[fn](evt)
 	})
 }
-input.toggleFullscreen=input.tabClose=input.tabSwitch=x=>x
+input.toggleFullscreen=function({path,target})
+{
+	const
+	editor=path.find(x=>(x.tagName||'').toLowerCase()==='tabbed-editor'),
+	fullscreen=output.toggleFullscreen(target.parentElement)
+	editor.setAttribute('fullscreen',fullscreen)
+	editor.dispatchEvent(new CustomEvent('fullscreen',{detail:{fullscreen}}))
+}
+output.toggleFullscreen=function(el,on=!JSON.parse(el.getAttribute('fullscreen')))
+{
+	el.setAttribute('fullscreen',on)
+	return on
+}
 input.tabClose=function({path,target})
 {
 	const
@@ -110,7 +113,12 @@ tabbed.editor=class extends HTMLElement
 	}
 	attributeChangedCallback(attr,oldVal,newVal)
 	{
-		
+		const {shadowRoot}=this
+		if (attr==='fullscreen'&&oldVal!==newVal)
+		{
+			output.toggleFullscreen(shadowRoot.querySelector('header'),newVal)
+		}
+		return newVal
 	}
 	connectedCallback()
 	{
@@ -123,5 +131,17 @@ tabbed.editor=class extends HTMLElement
 	disconnectedCallback()
 	{
 		console.error('add disconnectedCallback behavior')
+	}
+	static get observedAttributes()
+	{
+		return ['fullscreen']
+	}
+	get fullscreen()
+	{
+		return JSON.parse(this.shadowRoot.querySelector('header').getAttribute('fullscreen'))
+	}
+	set fullscreen(val)
+	{
+		return this.shadowRoot.querySelector('header').setAttribute('fullscreen',val)
 	}
 }
