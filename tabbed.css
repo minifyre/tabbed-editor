@@ -23,7 +23,7 @@
 			user-select:none;
 			width:1rem;
 		}
-		header[data-fullscreen="true"] [data-pointerdown="toggleFullscreen"]
+		header[fullscreen="true"] [data-pointerdown="toggleFullscreen"]
 		{
 			position:fixed;
 			opacity:0.5;
@@ -85,7 +85,7 @@
 		height:auto;
 		width:100%;
 	}
-	header[data-fullscreen="true"]+main
+	header[fullscreen="true"]+main
     {
         height:100%;
         position:fixed;
