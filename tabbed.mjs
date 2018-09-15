@@ -9,6 +9,7 @@ export default async function tabbed(url='/node_modules/tabbed-editor/')
 	config.dom=`<style>${css}</style>${html}`
 	customElements.define('tabbed-editor',tabbed.editor)
 }
+Object.assign(tabbed,{config,input,output,util})
 tabbed.editor=class extends HTMLElement
 {
 	constructor()
