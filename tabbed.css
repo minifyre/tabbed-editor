@@ -4,6 +4,7 @@
 	display:flex;
 	flex-direction:column;
 	height:100%;
+	position:relative;
 	width:100%;
 }
 	header
@@ -21,6 +22,12 @@
 			margin:0.25rem;
 			user-select:none;
 			width:1rem;
+		}
+		header[data-fullscreen="true"] [data-pointerdown="toggleFullscreen"]
+		{
+			position:fixed;
+			opacity:0.5;
+			z-index:2;
 		}
 		header button:hover
 		{
@@ -78,6 +85,12 @@
 		height:auto;
 		width:100%;
 	}
+	header[data-fullscreen="true"]+main
+    {
+        height:100%;
+        position:fixed;
+        width:100%;
+    }
 	::slotted(*)
 	{
 		position:absolute;
