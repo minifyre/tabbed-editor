@@ -19,16 +19,18 @@ input.tabClose=function({path,target})
 	tabs=util.findParent(target,'header').querySelector('.tabs'),
 	tab=util.findParent(target,'.tab'),
 	id=tab.getAttribute('for'),
-	btn=tab.previousSibling
+	btn=tab.previousSibling,
+	detail={close:id}
 	btn.remove()
 	tab.remove()
-	editor.dispatchEvent(new CustomEvent('tab',{detail:{close:id}}))
-	const next=tabs.querySelector('[type=radio]')
-	if(next)
+	//@todo open a new tab if the closed tab was the open one
+	if(!tabs.querySelector('[type="radio"]:checked'))
 	{
+		const next=tabs.querySelector('[type=radio]')
 		next.checked=true
-		editor.dispatchEvent(new CustomEvent('tab',{detail:{open:next.id}}))
+		detail.open=next.id
 	}
+	editor.dispatchEvent(new CustomEvent('tab',{detail}))
 }
 //@todo renaem to be more consistent with emmited evt.detail (new=open)
 input.tabNew=function({path,target})
