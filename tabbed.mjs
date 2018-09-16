@@ -15,7 +15,6 @@ tabbed.editor=class extends HTMLElement
 	constructor()
 	{
 		super()
-		this.state=[]
 		const shadow=this.attachShadow({mode:'open'})
 		shadow.innerHTML=config.dom
 		input(shadow.querySelector('header'),'pointerdown')
@@ -49,6 +48,10 @@ tabbed.editor=class extends HTMLElement
 	get fullscreen()
 	{
 		return JSON.parse(this.shadowRoot.querySelector('header').getAttribute('fullscreen'))
+	}
+	get tab()
+	{
+		return (this.shadowRoot.querySelector(':checked')||{}).id
 	}
 	set fullscreen(val)
 	{
