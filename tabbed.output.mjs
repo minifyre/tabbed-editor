@@ -1,10 +1,6 @@
 import util from './tabbed.util.mjs'
 const output={}
-output.toggleFullscreen=function(el,on=!JSON.parse(el.getAttribute('fullscreen')))
-{
-	el.setAttribute('fullscreen',on)
-	return on
-}
+output.tabEvt=(el,detail)=>el.dispatchEvent(new CustomEvent('tab',{detail}))
 output.tab=function(tab)
 {
 	const
@@ -18,5 +14,10 @@ output.tab=function(tab)
 	label.setAttribute('for',id)
 	label.prepend(icon)
 	return [btn,label]
+}
+output.toggleFullscreen=function(el,on=!JSON.parse(el.getAttribute('fullscreen')))
+{
+	el.setAttribute('fullscreen',on)
+	return on
 }
 export {output,util}

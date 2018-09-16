@@ -23,26 +23,26 @@ input.tabClose=function({path,target})
 	detail={close:id}
 	btn.remove()
 	tab.remove()
-	//@todo open a new tab if the closed tab was the open one
 	if(!tabs.querySelector('[type="radio"]:checked'))
 	{
 		const next=tabs.querySelector('[type=radio]')
-		next.checked=true
-		detail.open=next.id
+		if (next)
+		{
+			next.checked=true
+			detail.open=next.id
+		}
 	}
-	editor.dispatchEvent(new CustomEvent('tab',{detail}))
+	output.tabEvt(editor,detail)
 }
-//@todo renaem to be more consistent with emmited evt.detail (new=open)
+//@todo rename to be more consistent with emmited evt.detail (new=open)
 input.tabNew=function({path,target})
 {
 	const
 	editor=path.find(x=>(x.tagName||'').toLowerCase()==='tabbed-editor'),
 	tabs=util.findParent(target,'header').querySelector('.tabs'),
-	id=util.id(),
-	[btn,label]=output.tab({id})
-	tabs.prepend(label)
-	tabs.prepend(btn)
-	editor.dispatchEvent(new CustomEvent('tab',{detail:{open:id}}))
+	id=util.id()
+	tabs.prepend(...output.tab({id}))
+	output.tabEvt(editor,{open:id})
 }
 input.tabSwitch=function({path,target})
 {
@@ -51,8 +51,7 @@ input.tabSwitch=function({path,target})
 	tabs=util.findParent(target,'header').querySelector('.tabs'),
 	prevId=tabs.querySelector(':checked').id,
 	id=target.getAttribute('for')
-	if (id===prevId) return
-	editor.dispatchEvent(new CustomEvent('tab',{detail:{open:id}}))
+	if (id!==prevId) output.tabEvt(editor,{open:id})
 }
 input.toggleFullscreen=function({path,target})
 {
