@@ -1,4 +1,4 @@
-import util from './tabbed.util.mjs'
+import {config,logic,util} from './tabbed.logic.mjs'
 const output={}
 output.tabEvt=(el,detail)=>el.dispatchEvent(new CustomEvent('tab',{detail}))
 output.tab=function(tab)
@@ -20,4 +20,4 @@ output.toggleFullscreen=function(el,on=!JSON.parse(el.getAttribute('fullscreen')
 	el.setAttribute('fullscreen',on)
 	return on
 }
-export {output,util}
+export {config,logic,output,util}

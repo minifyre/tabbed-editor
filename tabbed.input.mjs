@@ -1,4 +1,4 @@
-import {output,util} from './tabbed.output.mjs'
+import {config,logic,output,util} from './tabbed.output.mjs'
 function input(el,type)
 {
 	const sel=`[data-${type}]`
@@ -61,4 +61,4 @@ input.toggleFullscreen=function({path,target})
 	editor.setAttribute('fullscreen',fullscreen)
 	editor.dispatchEvent(new CustomEvent('fullscreen',{detail:{fullscreen}}))
 }
-export {input,output,util}
+export {config,input,logic,output,util}
