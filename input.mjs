@@ -32,7 +32,7 @@ input.tabClose=function({path,target})
 			detail.open=next.id
 		}
 	}
-	output.tabEvt(editor,detail)
+	input.state(editor,'tab',{detail})
 }
 //@todo rename to be more consistent with emmited evt.detail (new=open)
 input.tabNew=function({path,target})
@@ -42,7 +42,7 @@ input.tabNew=function({path,target})
 	tabs=util.findParent(target,'header').querySelector('.tabs'),
 	id=util.id()
 	tabs.prepend(...output.tab({id}))
-	output.tabEvt(editor,{open:id})
+	input.state(editor,'tab',{detail:{open:id}})
 }
 input.tabSwitch=function({path,target})
 {
@@ -51,7 +51,7 @@ input.tabSwitch=function({path,target})
 	tabs=util.findParent(target,'header').querySelector('.tabs'),
 	prevId=tabs.querySelector(':checked').id,
 	id=target.getAttribute('for')
-	if (id!==prevId) output.tabEvt(editor,{open:id})
+	if (id!==prevId) input.state(editor,'tab',{detail:{open:id}})
 }
 input.toggleFullscreen=function({path,target})
 {
@@ -59,6 +59,23 @@ input.toggleFullscreen=function({path,target})
 	editor=path.find(x=>(x.tagName||'').toLowerCase()==='tabbed-editor'),
 	fullscreen=output.toggleFullscreen(target.parentElement)
 	editor.setAttribute('fullscreen',fullscreen)
-	editor.dispatchEvent(new CustomEvent('fullscreen',{detail:{fullscreen}}))
+	input.state(editor,'fullscreen',{detail:{fullscreen}})
+}
+input.state=function(editor,type,evt)
+{
+	const
+	root=editor.shadowRoot,
+	fullscreen=JSON.parse(root.querySelector('header').getAttribute('fullscreen')),
+	tab=(root.querySelector('.tabs :checked')||{}).id,
+	tabs=[...root.querySelectorAll('.tabs label')].map(function(el)
+	{
+		const
+		id=el.getAttribute('for'),
+		//@todo regex will not work when close button uses ligatures
+		name=el.innerText.replace(/^x\n/,'')
+		return {id,name}
+	})
+	editor.state=logic({fullscreen,tab,tabs})
+	output.event(editor,type,evt)
 }
 export {config,input,logic,output,util}
