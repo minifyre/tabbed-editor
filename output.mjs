@@ -1,4 +1,4 @@
-import {config,logic,util} from './tabbed.logic.mjs'
+import {config,logic,util} from './logic.mjs'
 const output={}
 output.tabEvt=(el,detail)=>el.dispatchEvent(new CustomEvent('tab',{detail}))
 output.tab=function(tab)

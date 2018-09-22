@@ -1,5 +1,5 @@
-import config from './tabbed.config.mjs'
-import util from './tabbed.util.mjs'
+import config from './config.mjs'
+import util from './util.mjs'
 function logic(opts={})
 {
 	const state=Object.assign({},config.state,opts)

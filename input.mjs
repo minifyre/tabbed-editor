@@ -1,4 +1,4 @@
-import {config,logic,output,util} from './tabbed.output.mjs'
+import {config,logic,output,util} from './output.mjs'
 function input(el,type)
 {
 	const sel=`[data-${type}]`

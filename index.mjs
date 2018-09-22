@@ -1,9 +1,9 @@
-import {config,input,logic,output,util} from './tabbed.input.mjs'
+import {config,input,logic,output,util} from './input.mjs'
 //@todo disable content if no tabs
 export default async function tabbed(url='/node_modules/tabbed-editor/')
 {
 	const
-	files=['css','html'].map(ext=>url+'tabbed.'+ext),
+	files=['css','html'].map(ext=>url+'index.'+ext),
 	[css,html]=await util.importFiles(files)
 	config.dom=`<style>${css}</style>${html}`
 	customElements.define('tabbed-editor',tabbed.editor)
