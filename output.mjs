@@ -1,6 +1,6 @@
 import {config,logic,util} from './logic.mjs'
 const output={}
-output.tabEvt=(el,detail)=>el.dispatchEvent(new CustomEvent('tab',{detail}))
+output.event=(el,type,evt)=>el.dispatchEvent(new CustomEvent(type,evt))
 output.tab=function(tab)
 {
 	const
