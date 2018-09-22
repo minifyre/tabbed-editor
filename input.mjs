@@ -76,6 +76,7 @@ input.state=function(editor,type,evt)
 		return {id,name}
 	})
 	editor.state=logic({fullscreen,tab,tabs})
+	if(!tab) output.tabs(editor)
 	output.event(editor,type,evt)
 }
 export {config,input,logic,output,util}

@@ -18,6 +18,7 @@ tabbed.editor=class extends HTMLElement
 		this.state=logic()
 		const shadow=this.attachShadow({mode:'open'})
 		shadow.innerHTML=config.dom
+		output.tabs(this)
 		input(shadow.querySelector('header'),'pointerdown')
 	}
 	attributeChangedCallback(attr,oldVal,newVal)
