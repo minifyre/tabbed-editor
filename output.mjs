@@ -1,6 +1,6 @@
-import util from './tabbed.util.mjs'
+import {config,logic,util} from './logic.mjs'
 const output={}
-output.tabEvt=(el,detail)=>el.dispatchEvent(new CustomEvent('tab',{detail}))
+output.event=(el,type,evt)=>el.dispatchEvent(new CustomEvent(type,evt))
 output.tab=function(tab)
 {
 	const
@@ -15,9 +15,20 @@ output.tab=function(tab)
 	label.prepend(icon)
 	return [btn,label]
 }
+//unlike output.tab, this takes an editor obj
+//@todo kill this off when dom updates become more streamlined
+output.tabs=function({state,shadowRoot:root})
+{
+	const form=root.querySelector('.tabs')
+	state.tabs
+	.map(tab=>output.tab(tab).reverse())//make buttons get added first
+	.reduce((arr,x)=>arr.concat(x),[])//flatten
+	.reverse()//add last items first since they are getting prepended
+	.forEach(el=>form.append(el))
+}
 output.toggleFullscreen=function(el,on=!JSON.parse(el.getAttribute('fullscreen')))
 {
 	el.setAttribute('fullscreen',on)
 	return on
 }
-export {output,util}
+export {config,logic,output,util}
