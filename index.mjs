@@ -11,11 +11,11 @@ export default async function tabbed(url='/node_modules/tabbed-editor/')
 Object.assign(tabbed,{config,input,logic,output,util})
 tabbed.editor=class extends HTMLElement
 {
-	constructor()
+	constructor(state={})
 	{
 		super()
 		//@todo always have a tab open, if closing the last one, open a new one
-		this.state=logic()
+		this.state=logic(state)
 		const shadow=this.attachShadow({mode:'open'})
 		shadow.innerHTML=config.dom
 		output.tabs(this)
