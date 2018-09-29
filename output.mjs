@@ -1,5 +1,23 @@
 import {config,logic,util} from './logic.mjs'
-const output={}
+import v from './node_modules/v/v.mjs'
+const output=function(state,input)
+{
+	return v('header',{data:{fullscreen:'false'},on:{pointerdown:input}},
+	v('button',{data:{pointerdown:'toggleFullscreen'},title:'fullscreen'},'x'),
+	v('button',{title:'settings'},'='),
+	v('button',{data:{pionterdown:'tabnew'},title:'new tab'},'+'),
+		v('.tabs',{},
+			...state.tabs.map(function({id,name},i)
+			{
+				const classes=state.selected===id?'selected':''
+				return v('.tab',{class:classes,data:{pointerdown:'tabSwitch'},id},
+					v('button.icon',{data:{pointerdown:'tabClose'}},'x'),
+					name
+				)
+			})
+		)
+	)
+}
 output.event=(el,type,evt)=>el.dispatchEvent(new CustomEvent(type,evt))
 output.tab=function(tab)
 {
