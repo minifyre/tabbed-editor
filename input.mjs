@@ -22,8 +22,19 @@ util.evt2editor=({path})=>path.find(x=>(x.tagName||'').toLowerCase()==='tabbed-e
 input.tabNew=function(evt)
 {
 	const editor=util.evt2editor(evt)
-	logic.newTab(editor.state)
+	logic.tabNew(editor.state)
 	return {detail:{open:editor.state.tab},type:'tab'}
+}
+
+
+
+
+input.tabSwitch=function(evt)
+{
+	const
+	editor=util.evt2editor(evt),
+	{id}=util.findParent(evt.target,'.tab')
+	if(logic.tabSwitch(editor.state,id)) return {detail:{open:id},type:'tab'}
 }
 
 
@@ -49,15 +60,6 @@ input.tabClose=function({path,target})
 		}
 	}
 	input.state(editor,'tab',{detail})
-}
-input.tabSwitch=function({path,target})
-{
-	const
-	editor=path.find(x=>(x.tagName||'').toLowerCase()==='tabbed-editor'),
-	tabs=util.findParent(target,'header').querySelector('.tabs'),
-	prevId=tabs.querySelector(':checked').id,
-	id=target.getAttribute('for')
-	if (id!==prevId) input.state(editor,'tab',{detail:{open:id}})
 }
 input.toggleFullscreen=function({path,target})
 {
