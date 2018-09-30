@@ -39,26 +39,29 @@ input.tabSwitch=function(evt,editor)
 	const {id}=util.findParent(evt.target,'.tab')
 	if(logic.tabSwitch(editor.state,id)) return {detail:{open:id},type:'tab'}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 input.toggleFullscreen=function(evt,editor)
 {
-	const
-	fullscreen=output.toggleFullscreen(target.parentElement)
+	const fullscreen=!editor.state.fullscreen
+	editor.state.fullscreen=fullscreen
 	editor.setAttribute('fullscreen',fullscreen)
-	input.state(editor,'fullscreen',{detail:{fullscreen}})
+	return {detail:{fullscreen},type:'fullscreen'}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 input.state=function(editor,type,evt)
 {
 	const

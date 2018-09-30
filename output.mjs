@@ -56,9 +56,4 @@ output.tabs=function({state,shadowRoot:root})
 	.reverse()//add last items first since they are getting prepended
 	.forEach(el=>form.append(el))
 }
-output.toggleFullscreen=function(el,on=!JSON.parse(el.getAttribute('fullscreen')))
-{
-	el.setAttribute('fullscreen',on)
-	return on
-}
 export {config,logic,output,util,v}
