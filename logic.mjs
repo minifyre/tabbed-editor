@@ -7,8 +7,12 @@ function logic(opts={})
 	if(!state.tab) state.tab=state.tabs[0].id
 	return state
 }
-logic.tabNew=function(state,newTab={id:util.id(),name:'untitled'})
+//@todo use util.mk
+logic.tabCreate=opts=>Object.assign({id:util.id(),name:'untitled'},opts)
 {
+logic.tabNew=function(state,opts)
+{
+	const newTab=logic.tabCreate(opts)
 	state.tabs.unshift(newTab)
 	logic.tabSwitch(state,newTab.id)
 }
