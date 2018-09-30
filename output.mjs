@@ -10,7 +10,7 @@ const output=function(state,input)
 			v('.tabs',{},
 				...state.tabs.map(function({id,name},i)
 				{
-					const classes=state.selected===id?'selected':''
+					const classes=state.tab===id?'selected':''
 					return v('.tab',{class:classes,data:{pointerdown:'tabSwitch'},id},
 						v('button.icon',{data:{pointerdown:'tabClose'}},'x'),
 						name

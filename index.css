@@ -23,7 +23,7 @@
 			user-select:none;
 			width:1rem;
 		}
-		header[fullscreen="true"] [data-pointerdown="toggleFullscreen"]
+		header[data-fullscreen="true"] [data-pointerdown="toggleFullscreen"]
 		{
 			position:fixed;
 			opacity:0.5;
@@ -44,11 +44,7 @@
 			flex-direction:row;
 			margin-left:0.25rem;
 		}
-			header .tabs [type="radio"]
-			{
-				display:none;
-			}
-			header .tabs [type="radio"]:checked+label
+			header .tabs .selected
 			{
 				background:#fff;
 			}
@@ -85,7 +81,7 @@
 		height:auto;
 		width:100%;
 	}
-	header[fullscreen="true"]+main
+	header[data-fullscreen="true"]+main
     {
         height:100%;
         position:fixed;
