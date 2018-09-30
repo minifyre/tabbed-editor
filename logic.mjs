@@ -12,14 +12,15 @@ logic.tabCreate=opts=>Object.assign({id:util.id(),name:'untitled'},opts)
 logic.tabClose=function(state,id)
 {
 	const//always have one tab
+	{tabs}=state,
 	switchTabs=state.tab===id,
-	mkTab=switchTabs&&state.tabs.length===1
+	mkTab=switchTabs&&tabs.length===1
 	if(mkTab) logic.tabNew(state)
 	//get replacement tab
 	const i=tabs.findIndex(x=>x.id===id)
-	if(!mkTab) tabSwitch(state,state.tabs[i+1<tabs.length?i+1:i-1].id)
+	if(!mkTab) logic.tabSwitch(state,tabs[i+1<tabs.length?i+1:i-1].id)
 	//close tab
-	state.tabs.splice(i,1)
+	tabs.splice(i,1)
 	return state.tab
 }
 logic.tabNew=function(state,opts)
