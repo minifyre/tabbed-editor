@@ -45,38 +45,4 @@ input.toggleFullscreen=function(evt,editor)
 	editor.setAttribute('fullscreen',fullscreen)
 	return {detail:{fullscreen},type:'fullscreen'}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-input.state=function(editor,type,evt)
-{
-	const
-	root=editor.shadowRoot,
-	fullscreen=JSON.parse(root.querySelector('header').getAttribute('fullscreen')),
-	tab=(root.querySelector('.tabs :checked')||{}).id,
-	tabs=[...root.querySelectorAll('.tabs label')].map(function(el)
-	{
-		const
-		id=el.getAttribute('for'),
-		//@todo regex will not work when close button uses ligatures
-		name=el.innerText.replace(/^x\n/,'')
-		return {id,name}
-	})
-	editor.state=logic({fullscreen,tab,tabs})
-	if(!tab) output.tabs(editor)
-	output.event(editor,type,evt)
-}
 export {config,input,logic,output,util,v}
