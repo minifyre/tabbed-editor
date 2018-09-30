@@ -2,21 +2,33 @@ import {config,logic,util} from './logic.mjs'
 import v from './node_modules/v/v.mjs'
 const output=function(state,input)
 {
-	return v('header',{data:{fullscreen:'false'},on:{pointerdown:input}},
-	v('button',{data:{pointerdown:'toggleFullscreen'},title:'fullscreen'},'x'),
-	v('button',{title:'settings'},'='),
-	v('button',{data:{pionterdown:'tabnew'},title:'new tab'},'+'),
-		v('.tabs',{},
-			...state.tabs.map(function({id,name},i)
-			{
-				const classes=state.selected===id?'selected':''
-				return v('.tab',{class:classes,data:{pointerdown:'tabSwitch'},id},
-					v('button.icon',{data:{pointerdown:'tabClose'}},'x'),
-					name
-				)
-			})
+	return [v('style',{},config.css),
+		v('header',{data:{fullscreen:'false'},on:{pointerdown:input}},
+		v('button',{data:{pointerdown:'toggleFullscreen'},title:'fullscreen'},'x'),
+		v('button',{title:'settings'},'='),
+		v('button',{data:{pointerdown:'tabNew'},title:'new tab'},'+'),
+			v('.tabs',{},
+				...state.tabs.map(function({id,name},i)
+				{
+					const classes=state.selected===id?'selected':''
+					return v('.tab',{class:classes,data:{pointerdown:'tabSwitch'},id},
+						v('button.icon',{data:{pointerdown:'tabClose'}},'x'),
+						name
+					)
+				})
+			)
+		),
+		v('main',{},
+			v('slot')
 		)
-	)
+	]
+	//v.update=function(parent,newNode,oldNode,child=parent.childNodes[0])
+}
+output.rerender=function(editor)
+{
+	const newDom=output(editor.state)
+	v.flatUpdate(editor.shadowRoot,newDom,editor.dom,1,1)
+	editor.dom=newDom//@todo pureify
 }
 output.event=(el,type,evt)=>el.dispatchEvent(new CustomEvent(type,evt))
 output.tab=function(tab)
@@ -49,4 +61,4 @@ output.toggleFullscreen=function(el,on=!JSON.parse(el.getAttribute('fullscreen')
 	el.setAttribute('fullscreen',on)
 	return on
 }
-export {config,logic,output,util}
+export {config,logic,output,util,v}

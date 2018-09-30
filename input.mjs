@@ -1,5 +1,5 @@
-import {config,logic,output,util} from './output.mjs'
 function input(el,type)
+import {config,logic,output,util,v} from './output.mjs'
 {
 	const sel=`[data-${type}]`
 	el.addEventListener(type,function(evt)
@@ -79,4 +79,4 @@ input.state=function(editor,type,evt)
 	if(!tab) output.tabs(editor)
 	output.event(editor,type,evt)
 }
-export {config,input,logic,output,util}
+export {config,input,logic,output,util,v}
