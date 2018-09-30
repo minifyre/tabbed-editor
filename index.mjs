@@ -1,33 +1,25 @@
-import {config,input,logic,output,util} from './input.mjs'
+import {config,input,logic,output,util,v} from './input.mjs'
 //@todo disable content if no tabs
 export default async function tabbed(url='/node_modules/tabbed-editor/')
 {
 	const
-	files=['css','html'].map(ext=>url+'index.'+ext),
-	[css,html]=await util.importFiles(files)
-	config.dom=`<style>${css}</style>${html}`
+	[css]=await util.importFiles([url+'index.css'])
+	config.css=css
 	customElements.define('tabbed-editor',tabbed.editor)
 }
-Object.assign(tabbed,{config,input,logic,output,util})
+Object.assign(tabbed,{config,input,logic,output,util,v})
 tabbed.editor=class extends HTMLElement
 {
 	constructor(state={})
 	{
 		super()
-		//@todo always have a tab open, if closing the last one, open a new one
-		this.state=logic(state)
 		const shadow=this.attachShadow({mode:'open'})
-		shadow.innerHTML=config.dom
-		output.tabs(this)
-		input(shadow.querySelector('header'),'pointerdown')
+		this.state=logic(state)
+		this.dom=output(this.state,input)
+		v.flatUpdate(shadow,this.dom)
 	}
 	attributeChangedCallback(attr,oldVal,newVal)
 	{
-		const {shadowRoot}=this
-		if (attr==='fullscreen'&&oldVal!==newVal)
-		{
-			output.toggleFullscreen(shadowRoot.querySelector('header'),newVal)
-		}
 		return newVal
 	}
 	connectedCallback()

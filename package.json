@@ -1,0 +1,13 @@
+{
+	"name": "tabbed-editor",
+	"description": "",
+	"homepage": "https://github.com/minifyre/tabbed-editor",
+	"license": "MIT",
+	"version": "0.5.0",
+	"dependencies": {
+		"v": "minifyre/v"
+	},
+	"devDependencies": {
+		"cherub": "minifyre/cherub"
+	}
+}

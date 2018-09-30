@@ -1,6 +1,35 @@
 import {config,logic,util} from './logic.mjs'
-const output={}
-output.event=(el,type,evt)=>el.dispatchEvent(new CustomEvent(type,evt))
+import v from './node_modules/v/v.mjs'
+const output=function({fullscreen,tab,tabs},input)
+{
+	return [v('style',{},config.css),
+		v('header',{data:{fullscreen},on:{pointerdown:input}},
+		v('button',{data:{pointerdown:'toggleFullscreen'},title:'fullscreen'},'x'),
+		//v('button',{title:'settings'},'='),
+		v('button',{data:{pointerdown:'tabNew'},title:'new tab'},'+'),
+			v('.tabs',{},
+				...tabs.map(function({id,name})
+				{
+					const classes=tab===id?'selected':''
+					return v('.tab',{class:classes,data:{pointerdown:'tabSwitch'},id},
+						v('button.icon',{data:{pointerdown:'tabClose'}},'x'),
+						name
+					)
+				})
+			)
+		),
+		v('main',{},
+			v('slot')
+		)
+	]
+}
+output.rerender=function(editor,input)
+{
+	const newDom=output(editor.state,input)
+	v.flatUpdate(editor.shadowRoot,newDom,editor.dom,1,1)
+	editor.dom=newDom//@todo pureify
+}
+output.event=(el,evt)=>el.dispatchEvent(new CustomEvent(evt.type,evt))
 output.tab=function(tab)
 {
 	const
@@ -26,9 +55,4 @@ output.tabs=function({state,shadowRoot:root})
 	.reverse()//add last items first since they are getting prepended
 	.forEach(el=>form.append(el))
 }
-output.toggleFullscreen=function(el,on=!JSON.parse(el.getAttribute('fullscreen')))
-{
-	el.setAttribute('fullscreen',on)
-	return on
-}
-export {config,logic,output,util}
+export {config,logic,output,util,v}
