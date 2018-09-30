@@ -14,8 +14,7 @@ function input(evt)
 	evt2emit=input[fn](evt,editor)
 
 	output.rerender(editor,input)//@todo find a better way for output to access input
-	//@todo have output.event derrive type from event
-	if(evt2emit) output.event(editor,evt2emit.type,evt2emit)
+	if(evt2emit) output.event(editor,evt2emit)
 }
 input.tabClose=function(evt,editor)
 {

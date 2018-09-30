@@ -8,7 +8,7 @@ const output=function({fullscreen,tab,tabs},input)
 		//v('button',{title:'settings'},'='),
 		v('button',{data:{pointerdown:'tabNew'},title:'new tab'},'+'),
 			v('.tabs',{},
-				...tabs.map(function({id,name},i)
+				...tabs.map(function({id,name})
 				{
 					const classes=tab===id?'selected':''
 					return v('.tab',{class:classes,data:{pointerdown:'tabSwitch'},id},
@@ -22,7 +22,6 @@ const output=function({fullscreen,tab,tabs},input)
 			v('slot')
 		)
 	]
-	//v.update=function(parent,newNode,oldNode,child=parent.childNodes[0])
 }
 output.rerender=function(editor,input)
 {
@@ -30,7 +29,7 @@ output.rerender=function(editor,input)
 	v.flatUpdate(editor.shadowRoot,newDom,editor.dom,1,1)
 	editor.dom=newDom//@todo pureify
 }
-output.event=(el,type,evt)=>el.dispatchEvent(new CustomEvent(type,evt))
+output.event=(el,evt)=>el.dispatchEvent(new CustomEvent(evt.type,evt))
 output.tab=function(tab)
 {
 	const

@@ -15,6 +15,7 @@ logic.tabClose=function(state,id)
 	{tabs}=state,
 	switchTabs=state.tab===id,
 	mkTab=switchTabs&&tabs.length===1
+	//@todo find a way to oneline with tabSwitch, without breaking indexes
 	if(mkTab) logic.tabNew(state)
 	//get replacement tab
 	const i=tabs.findIndex(x=>x.id===id)
@@ -28,6 +29,7 @@ logic.tabNew=function(state,opts)
 	const newTab=logic.tabCreate(opts)
 	state.tabs.unshift(newTab)
 	logic.tabSwitch(state,newTab.id)
+	return newTab.id
 }
 logic.tabSwitch=function(state,id)
 {
