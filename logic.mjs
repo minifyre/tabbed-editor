@@ -35,4 +35,5 @@ logic.tabSwitch=function(state,id)
 	if(newTab) state.tab=id
 	return newTab
 }
+logic.toggleFullscreen=state=>state.fullscreen=!state.fullscreen
 export {config,logic,util}

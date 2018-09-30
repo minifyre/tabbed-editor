@@ -41,8 +41,7 @@ input.tabSwitch=function(evt,editor)
 }
 input.toggleFullscreen=function(evt,editor)
 {
-	const fullscreen=!editor.state.fullscreen
-	editor.state.fullscreen=fullscreen
+	const fullscreen=logic.toggleFullscreen(editor.state)
 	editor.setAttribute('fullscreen',fullscreen)
 	return {detail:{fullscreen},type:'fullscreen'}
 }
