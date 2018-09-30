@@ -8,41 +8,33 @@ function input(evt)
 
 	if(!el) return
 
-	const
-	editor=util.evt2editor(evt),
+	const//@todo clean up evt2editor code
+	editor=evt.path.find(x=>(x.tagName||'').toLowerCase()==='tabbed-editor'),
 	fn=el.getAttribute(attr),
-	evt2emit=input[fn](evt)
+	evt2emit=input[fn](evt,editor)
 
 	output.rerender(editor,input)//@todo find a better way for output to access input
 	//@todo have output.event derrive type from event
 	if(evt2emit) output.event(editor,evt2emit.type,evt2emit)
 }
-//@todo delete temp code
-util.evt2editor=({path})=>path.find(x=>(x.tagName||'').toLowerCase()==='tabbed-editor')
-input.tabNew=function(evt)
+input.tabNew=function(evt,editor)
 {
-	const editor=util.evt2editor(evt)
 	logic.tabNew(editor.state)
 	return {detail:{open:editor.state.tab},type:'tab'}
 }
-
-
-
-
-input.tabSwitch=function(evt)
+input.tabSwitch=function(evt,editor)
 {
-	const
-	editor=util.evt2editor(evt),
-	{id}=util.findParent(evt.target,'.tab')
+	const {id}=util.findParent(evt.target,'.tab')
 	if(logic.tabSwitch(editor.state,id)) return {detail:{open:id},type:'tab'}
 }
 
 
 
-input.tabClose=function({path,target})
+
+
+input.tabClose=function(evt,editor)
 {
 	const
-	editor=path.find(x=>(x.tagName||'').toLowerCase()==='tabbed-editor'),
 	tabs=util.findParent(target,'header').querySelector('.tabs'),
 	tab=util.findParent(target,'.tab'),
 	id=tab.getAttribute('for'),
@@ -61,10 +53,9 @@ input.tabClose=function({path,target})
 	}
 	input.state(editor,'tab',{detail})
 }
-input.toggleFullscreen=function({path,target})
+input.toggleFullscreen=function(evt,editor)
 {
 	const
-	editor=path.find(x=>(x.tagName||'').toLowerCase()==='tabbed-editor'),
 	fullscreen=output.toggleFullscreen(target.parentElement)
 	editor.setAttribute('fullscreen',fullscreen)
 	input.state(editor,'fullscreen',{detail:{fullscreen}})
