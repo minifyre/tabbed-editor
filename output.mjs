@@ -5,7 +5,7 @@ const output=function({fullscreen,tab,tabs},input)
 	return [v('style',{},config.css),
 		v('header',{data:{fullscreen},on:{pointerdown:input}},
 		v('button',{data:{pointerdown:'toggleFullscreen'},title:'fullscreen'},'x'),
-		v('button',{title:'settings'},'='),
+		//v('button',{title:'settings'},'='),
 		v('button',{data:{pointerdown:'tabNew'},title:'new tab'},'+'),
 			v('.tabs',{},
 				...tabs.map(function({id,name},i)
