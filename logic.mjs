@@ -9,7 +9,25 @@ function logic(opts={})
 }
 //@todo use util.mk
 logic.tabCreate=opts=>Object.assign({id:util.id(),name:'untitled'},opts)
+logic.tabClose=function(state,id)
 {
+	const
+	{tabs}=state,
+	i=tabs.findIndex(x=>x.id===id),
+	nextTabIndex=i+1<tabs.length?i+1:i-1
+	//@todo simplify
+	if(tabs[nextTabIndex])
+	{
+		state.tab=state.tabs[nextTabIndex].id
+		state.tabs.splice(i,1)
+	}
+	else
+	{
+		const newTab=logic.tabCreate()
+		state.tab=newTab.id
+		state.tabs.splice(i,1,newTab)
+	}
+}
 logic.tabNew=function(state,opts)
 {
 	const newTab=logic.tabCreate(opts)
