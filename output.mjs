@@ -1,16 +1,16 @@
 import {config,logic,util} from './logic.mjs'
 import v from './node_modules/v/v.mjs'
-const output=function(state,input)
+const output=function({fullscreen,tab,tabs},input)
 {
 	return [v('style',{},config.css),
-		v('header',{data:{fullscreen:'false'},on:{pointerdown:input}},
+		v('header',{data:{fullscreen},on:{pointerdown:input}},
 		v('button',{data:{pointerdown:'toggleFullscreen'},title:'fullscreen'},'x'),
 		v('button',{title:'settings'},'='),
 		v('button',{data:{pointerdown:'tabNew'},title:'new tab'},'+'),
 			v('.tabs',{},
-				...state.tabs.map(function({id,name},i)
+				...tabs.map(function({id,name},i)
 				{
-					const classes=state.tab===id?'selected':''
+					const classes=tab===id?'selected':''
 					return v('.tab',{class:classes,data:{pointerdown:'tabSwitch'},id},
 						v('button.icon',{data:{pointerdown:'tabClose'}},'x'),
 						name

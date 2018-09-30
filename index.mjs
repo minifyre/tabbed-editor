@@ -20,11 +20,6 @@ tabbed.editor=class extends HTMLElement
 	}
 	attributeChangedCallback(attr,oldVal,newVal)
 	{
-		const {shadowRoot}=this
-		if (attr==='fullscreen'&&oldVal!==newVal)
-		{
-			output.toggleFullscreen(shadowRoot.querySelector('header'),newVal)
-		}
 		return newVal
 	}
 	connectedCallback()
