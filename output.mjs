@@ -24,9 +24,9 @@ const output=function(state,input)
 	]
 	//v.update=function(parent,newNode,oldNode,child=parent.childNodes[0])
 }
-output.rerender=function(editor)
+output.rerender=function(editor,input)
 {
-	const newDom=output(editor.state)
+	const newDom=output(editor.state,input)
 	v.flatUpdate(editor.shadowRoot,newDom,editor.dom,1,1)
 	editor.dom=newDom//@todo pureify
 }
