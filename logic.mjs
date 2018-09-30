@@ -7,4 +7,9 @@ function logic(opts={})
 	if(!state.tab) state.tab=state.tabs[0].id
 	return state
 }
+logic.newTab=function(state,newTab={id:util.id(),name:'untitled'})
+{
+	state.tabs.unshift(newTab)
+	state.tab=newTab.id
+}
 export {config,logic,util}
