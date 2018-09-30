@@ -17,6 +17,18 @@ function input(evt)
 	//@todo have output.event derrive type from event
 	if(evt2emit) output.event(editor,evt2emit.type,evt2emit)
 }
+input.tabClose=function(evt,editor)
+{
+	const
+	{id}=util.findParent(evt.target,'.tab'),
+	switchTabs=editor.state.tab===id,
+	detail={close:id},
+	newlyOpenedTabId=logic.tabClose(editor.state,id)
+
+	if (switchTabs) detail.open=newlyOpenedTabId
+
+	return {detail,type:'tab'}
+}
 input.tabNew=function(evt,editor)
 {
 	logic.tabNew(editor.state)
@@ -32,27 +44,14 @@ input.tabSwitch=function(evt,editor)
 
 
 
-input.tabClose=function(evt,editor)
-{
-	const
-	tabs=util.findParent(target,'header').querySelector('.tabs'),
-	tab=util.findParent(target,'.tab'),
-	id=tab.getAttribute('for'),
-	btn=tab.previousSibling,
-	detail={close:id}
-	btn.remove()
-	tab.remove()
-	if(!tabs.querySelector('[type="radio"]:checked'))
-	{
-		const next=tabs.querySelector('[type=radio]')
-		if (next)
-		{
-			next.checked=true
-			detail.open=next.id
-		}
-	}
-	input.state(editor,'tab',{detail})
-}
+
+
+
+
+
+
+
+
 input.toggleFullscreen=function(evt,editor)
 {
 	const
