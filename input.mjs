@@ -1,16 +1,24 @@
-function input(el,type)
 import {config,logic,output,util,v} from './output.mjs'
+function input(evt)
 {
-	const sel=`[data-${type}]`
-	el.addEventListener(type,function(evt)
-	{
-		const
-		{target}=evt,
-		el=util.findParent(target,sel)
-		if(!el) return
-		const fn=el.getAttribute(`data-${type}`)
-		input[fn](evt)
-	})
+	const
+	{target,type}=evt,
+	attr=`data-${type}`,
+	el=util.findParent(target,`[${attr}]`)
+
+	if(!el) return
+
+	const
+	editor=util.evt2editor(evt),
+	fn=el.getAttribute(attr),
+	evt2emit=input[fn](evt)
+
+	output.rerender(editor,input)//@todo find a better way for output to access input
+	//@todo have output.event derrive type from event
+	if(evt2emit) output.event(editor,evt2emit.type,evt2emit)
+}
+//@todo delete temp code
+util.evt2editor=({path})=>path.find(x=>(x.tagName||'').toLowerCase()==='tabbed-editor')
 }
 input.tabClose=function({path,target})
 {
