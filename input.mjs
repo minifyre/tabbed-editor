@@ -19,7 +19,15 @@ function input(evt)
 }
 //@todo delete temp code
 util.evt2editor=({path})=>path.find(x=>(x.tagName||'').toLowerCase()==='tabbed-editor')
+input.tabNew=function(evt)
+{
+	const editor=util.evt2editor(evt)
+	logic.newTab(editor.state)
+	return {detail:{open:editor.state.tab},type:'tab'}
 }
+
+
+
 input.tabClose=function({path,target})
 {
 	const
@@ -41,16 +49,6 @@ input.tabClose=function({path,target})
 		}
 	}
 	input.state(editor,'tab',{detail})
-}
-//@todo rename to be more consistent with emmited evt.detail (new=open)
-input.tabNew=function({path,target})
-{
-	const
-	editor=path.find(x=>(x.tagName||'').toLowerCase()==='tabbed-editor'),
-	tabs=util.findParent(target,'header').querySelector('.tabs'),
-	id=util.id()
-	tabs.prepend(...output.tab({id}))
-	input.state(editor,'tab',{detail:{open:id}})
 }
 input.tabSwitch=function({path,target})
 {
