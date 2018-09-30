@@ -7,9 +7,15 @@ function logic(opts={})
 	if(!state.tab) state.tab=state.tabs[0].id
 	return state
 }
-logic.newTab=function(state,newTab={id:util.id(),name:'untitled'})
+logic.tabNew=function(state,newTab={id:util.id(),name:'untitled'})
 {
 	state.tabs.unshift(newTab)
-	state.tab=newTab.id
+	logic.tabSwitch(state,newTab.id)
+}
+logic.tabSwitch=function(state,id)
+{
+	const newTab=state.tab!==id
+	if(newTab) state.tab=id
+	return newTab
 }
 export {config,logic,util}
