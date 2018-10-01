@@ -7,6 +7,7 @@ function logic(opts={})
 	if(!state.tab) state.tab=state.tabs[0].id
 	return state
 }
+const silo={config,logic,util}
 //@todo use util.mk
 logic.tabCreate=opts=>Object.assign({id:util.id(),name:'untitled'},opts)
 logic.tabClose=function(state,id)
@@ -38,4 +39,4 @@ logic.tabSwitch=function(state,id)
 	return newTab
 }
 logic.toggleFullscreen=state=>state.fullscreen=!state.fullscreen
-export {config,logic,util}
+export default silo

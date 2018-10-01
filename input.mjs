@@ -1,4 +1,5 @@
-import {config,logic,output,util,v} from './output.mjs'
+import silo from './output.mjs'
+const {config,logic,output,util,v}=silo
 function input(evt)
 {
 	const
@@ -13,9 +14,10 @@ function input(evt)
 	fn=el.getAttribute(attr),
 	evt2emit=input[fn](evt,editor)
 
-	output.rerender(editor,input)//@todo find a better way for output to access input
+	output.rerender(editor)
 	if(evt2emit) output.event(editor,evt2emit)
 }
+Object.assign(silo,{input})
 input.tabClose=function(evt,editor)
 {
 	const
@@ -44,4 +46,4 @@ input.toggleFullscreen=function(evt,editor)
 	editor.setAttribute('fullscreen',fullscreen)
 	return {detail:{fullscreen},type:'fullscreen'}
 }
-export {config,input,logic,output,util,v}
+export default silo

@@ -1,9 +1,11 @@
-import {config,logic,util} from './logic.mjs'
+import silo from './logic.mjs'
 import v from './node_modules/v/v.mjs'
-const output=function({fullscreen,tab,tabs},input)
+const
+{config,util}=silo,
+output=function({fullscreen,tab,tabs})
 {
 	return [v('style',{},config.css),
-		v('header',{data:{fullscreen},on:{pointerdown:input}},
+		v('header',{data:{fullscreen},on:{pointerdown:silo.input}},
 		v('button',{data:{pointerdown:'toggleFullscreen'},title:'fullscreen'},'x'),
 		//v('button',{title:'settings'},'='),
 		v('button',{data:{pointerdown:'tabNew'},title:'new tab'},'+'),
@@ -23,9 +25,10 @@ const output=function({fullscreen,tab,tabs},input)
 		)
 	]
 }
-output.rerender=function(editor,input)
+Object.assign(silo,{output,v})
+output.rerender=function(editor)
 {
-	const newDom=output(editor.state,input)
+	const newDom=output(editor.state,silo.input)
 	v.flatUpdate(editor.shadowRoot,newDom,editor.dom,1,1)
 	editor.dom=newDom//@todo pureify
 }
@@ -55,4 +58,4 @@ output.tabs=function({state,shadowRoot:root})
 	.reverse()//add last items first since they are getting prepended
 	.forEach(el=>form.append(el))
 }
-export {config,logic,output,util,v}
+export default silo

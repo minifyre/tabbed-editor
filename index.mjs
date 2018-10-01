@@ -1,4 +1,5 @@
-import {config,input,logic,output,util,v} from './input.mjs'
+import silo from './input.mjs'
+const {config,input,logic,output,util,v}=silo
 //@todo disable content if no tabs
 export default async function tabbed(url='/node_modules/tabbed-editor/')
 {
@@ -7,7 +8,7 @@ export default async function tabbed(url='/node_modules/tabbed-editor/')
 	config.css=css
 	customElements.define('tabbed-editor',tabbed.editor)
 }
-Object.assign(tabbed,{config,input,logic,output,util,v})
+Object.assign(tabbed,silo)
 tabbed.editor=class extends HTMLElement
 {
 	constructor(state={})
@@ -15,7 +16,7 @@ tabbed.editor=class extends HTMLElement
 		super()
 		const shadow=this.attachShadow({mode:'open'})
 		this.state=logic(state)
-		this.dom=output(this.state,input)
+		this.dom=output(this.state)
 		v.flatUpdate(shadow,this.dom)
 	}
 	attributeChangedCallback(attr,oldVal,newVal)
