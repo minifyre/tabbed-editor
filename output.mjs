@@ -10,7 +10,11 @@ function output({fullscreen,tab,tabs})
 		evt2emit=input(evt),
 		editor=util.evt2customEl(evt)
 
-		silo.output.rerender(editor)
+
+		const newDom=output(editor.state,silo.input)
+		v.flatUpdate(editor.shadowRoot,newDom,editor.dom,1,1)
+		editor.dom=newDom//@todo pureify
+
 		if(evt2emit) output.event(editor,evt2emit)
 	}
 	return [v('style',{},config.css),
@@ -33,13 +37,6 @@ function output({fullscreen,tab,tabs})
 			v('slot')
 		)
 	]
-}
-Object.assign(silo,{output,v})
-output.rerender=function(editor)
-{
-	const newDom=output(editor.state,silo.input)
-	v.flatUpdate(editor.shadowRoot,newDom,editor.dom,1,1)
-	editor.dom=newDom//@todo pureify
 }
 output.event=(el,evt)=>el.dispatchEvent(new CustomEvent(evt.type,evt))
 export default Object.assign(silo,{output})
