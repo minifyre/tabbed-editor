@@ -12,10 +12,7 @@ function output(editor)
 		evt2emit=input(evt),
 		editor=util.evt2customEl(evt)
 
-
-		const newDom=output(editor,silo.input)
-		v.flatUpdate(editor.shadowRoot,newDom,editor.dom,1,1)
-		editor.dom=newDom//@todo pureify
+		editor.render()
 
 		if(evt2emit) output.event(editor,evt2emit)
 	}
