@@ -18,9 +18,9 @@ function output(editor)
 	}
 	return [v('style',{},config.css),
 		v('header',{data:{fullscreen},on:{pointerdown}},
-		v('button',{data:{pointerdown:'toggleFullscreen'},title:'fullscreen'},'x'),
-		//v('button',{title:'settings'},'='),
-		v('button',{data:{pointerdown:'tabNew'},title:'new tab'},'+'),
+			v('button',{data:{pointerdown:'toggleFullscreen'},title:'fullscreen'},'x'),
+			//v('button',{title:'settings'},'='),
+			v('button',{data:{pointerdown:'tabNew'},title:'new tab'},'+'),
 			v('.tabs',{},
 				...tabs.map(function({id,name})
 				{
