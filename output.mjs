@@ -2,16 +2,18 @@ import silo from './input.mjs'
 const
 {config,input,logic,util}=silo,
 {v}=util
-function output({fullscreen,tab,tabs})
+function output(editor)
 {
-	const pointerdown=function(evt)
+	const
+	{fullscreen,tab,tabs}=editor.state,
+	pointerdown=function(evt)
 	{
 		const
 		evt2emit=input(evt),
 		editor=util.evt2customEl(evt)
 
 
-		const newDom=output(editor.state,silo.input)
+		const newDom=output(editor,silo.input)
 		v.flatUpdate(editor.shadowRoot,newDom,editor.dom,1,1)
 		editor.dom=newDom//@todo pureify
 

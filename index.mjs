@@ -16,7 +16,7 @@ tabbed.editor=class extends silo.viewer
 		// this.state=truth(logic(state),(...args)=>renderer(args))
 		// renderer=v.render(this.shadowRoot,this,output)
 		this.state=logic(state)
-		this.dom=output(this.state)
+		this.dom=output(this)
 		v.flatUpdate(this.shadowRoot,this.dom)
 	}
 	attributeChangedCallback(attr,oldVal,newVal)
