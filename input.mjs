@@ -1,20 +1,5 @@
 import silo from './logic.mjs'
-const {config,logic,util}=silo
-function input(evt)//@todo use default input handler
-{
-	const
-	{target,type}=evt,
-	attr=`data-${type}`,
-	el=util.findParent(target,`[${attr}]`)
-
-	if(!el) return
-
-	const//@todo clean up evt2editor code
-	editor=evt.path.find(x=>(x.tagName||'').toLowerCase()==='tabbed-editor'),
-	fn=el.getAttribute(attr)
-	return input[fn](evt,editor)
-}
-Object.assign(silo,{input})
+const {config,input,logic,util}=silo
 input.tabClose=function(evt,editor)
 {
 	const
@@ -43,4 +28,4 @@ input.toggleFullscreen=function(evt,editor)
 	editor.setAttribute('fullscreen',fullscreen)
 	return {detail:{fullscreen},type:'fullscreen'}
 }
-export default Object.assign(silo,{input})//@todo use default handler	 export default silo
+export default silo
