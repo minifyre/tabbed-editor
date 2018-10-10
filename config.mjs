@@ -3,6 +3,7 @@ config.state=
 {
 	fullscreen:false,
 	tab:null,
-	tabs:[]
+	tabs:[],
+	type:'tabbed-editor'
 }
 export default config
