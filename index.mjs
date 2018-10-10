@@ -15,10 +15,6 @@ tabbed.editor=class extends silo.viewer
 		this.state=logic(state)
 		this.render=v.render(this.shadowRoot,this,output)
 	}
-	attributeChangedCallback(attr,oldVal,newVal)
-	{
-		return newVal
-	}
 	static get observedAttributes()
 	{
 		return ['fullscreen']
