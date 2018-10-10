@@ -1,44 +1,33 @@
-import silo from './input.mjs'
-const {config,input,logic,output,util,v}=silo
-//@todo disable content if no tabs
+import silo from './output.mjs'
+const
+{config,input,logic,output,util}=silo,
+{truth,v}=util
 export default async function tabbed(url='/node_modules/tabbed-editor/')
 {
-	const
-	[css]=await util.importFiles([url+'index.css'])
-	config.css=css
-	customElements.define('tabbed-editor',tabbed.editor)
+	await silo(url,'tabbed-editor',tabbed.editor)
 }
 Object.assign(tabbed,silo)
-tabbed.editor=class extends HTMLElement
+tabbed.editor=class extends silo.viewer
 {
 	constructor(state={})
 	{
-		super()
-		const shadow=this.attachShadow({mode:'open'})
+		super(state)
+		// let renderer=x=>x
+		// this.state=truth(logic(state),(...args)=>renderer(args))
+		// renderer=v.render(this.shadowRoot,this,output)
 		this.state=logic(state)
 		this.dom=output(this.state)
-		v.flatUpdate(shadow,this.dom)
+		v.flatUpdate(this.shadowRoot,this.dom)
 	}
 	attributeChangedCallback(attr,oldVal,newVal)
 	{
 		return newVal
 	}
-	connectedCallback()
-	{
-		const editor=this
-	}
-	adoptedCallback()
-	{
-		console.error('add adoptedCallback behavior')
-	}
-	disconnectedCallback()
-	{
-		console.error('add disconnectedCallback behavior')
-	}
 	static get observedAttributes()
 	{
 		return ['fullscreen']
 	}
+	//@todo refer these into state
 	//@todo add a tabs property to show the id & name of every tab
 	get fullscreen()
 	{
