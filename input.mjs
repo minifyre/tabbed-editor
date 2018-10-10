@@ -1,23 +1,5 @@
-import silo from './output.mjs'
-const {config,logic,output,util,v}=silo
-function input(evt)
-{
-	const
-	{target,type}=evt,
-	attr=`data-${type}`,
-	el=util.findParent(target,`[${attr}]`)
-
-	if(!el) return
-
-	const//@todo clean up evt2editor code
-	editor=evt.path.find(x=>(x.tagName||'').toLowerCase()==='tabbed-editor'),
-	fn=el.getAttribute(attr),
-	evt2emit=input[fn](evt,editor)
-
-	output.rerender(editor)
-	if(evt2emit) output.event(editor,evt2emit)
-}
-Object.assign(silo,{input})
+import silo from './logic.mjs'
+const {config,input,logic,util}=silo
 input.tabClose=function(evt,editor)
 {
 	const
