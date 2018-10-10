@@ -33,10 +33,6 @@ tabbed.editor=class extends silo.viewer
 	{
 		return JSON.parse(this.shadowRoot.querySelector('header').getAttribute('fullscreen'))
 	}
-	get tab()
-	{
-		return (this.shadowRoot.querySelector(':checked')||{}).id
-	}
 	set fullscreen(val)
 	{
 		return this.shadowRoot.querySelector('header').setAttribute('fullscreen',val)
