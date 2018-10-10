@@ -1,13 +1,12 @@
-import config from './config.mjs'
-import util from './util.mjs'
+import silo from './util.mjs'
+const {config,logic,util}=silo
 function logic(opts={})
 {
-	const state=Object.assign({},config.state,opts)
+	const state=util.mk(silo.config.state,opts)
 	if(!state.tabs.length) state.tabs.push({id:util.id(),name:'untitled'})
 	if(!state.tab) state.tab=state.tabs[0].id
 	return state
 }
-const silo={config,logic,util}
 //@todo use util.mk
 logic.tabCreate=opts=>Object.assign({id:util.id(),name:'untitled'},opts)
 logic.tabClose=function(state,id)
@@ -39,4 +38,4 @@ logic.tabSwitch=function(state,id)
 	return newTab
 }
 logic.toggleFullscreen=state=>state.fullscreen=!state.fullscreen
-export default silo
+export default Object.assign(silo,{logic})
