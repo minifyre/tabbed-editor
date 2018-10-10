@@ -27,14 +27,12 @@ tabbed.editor=class extends silo.viewer
 	{
 		return ['fullscreen']
 	}
-	//@todo refer these into state
-	//@todo add a tabs property to show the id & name of every tab
 	get fullscreen()
 	{
-		return JSON.parse(this.shadowRoot.querySelector('header').getAttribute('fullscreen'))
+		return !!this.state.fullscreen
 	}
 	set fullscreen(val)
 	{
-		return this.shadowRoot.querySelector('header').setAttribute('fullscreen',val)
+		return this.state.fullscreen=!!val
 	}
 }
