@@ -1,11 +1,11 @@
-import silo from './logic.mjs'
-import v from './node_modules/v/v.mjs'
+import silo from './input.mjs'
 const
-{config,util}=silo,
-output=function({fullscreen,tab,tabs})
+{config,input,logic,util}=silo,
+{v}=util
+function output({fullscreen,tab,tabs})
 {
 	return [v('style',{},config.css),
-		v('header',{data:{fullscreen},on:{pointerdown:silo.input}},
+		v('header',{data:{fullscreen},on:{pointerdown:input}},
 		v('button',{data:{pointerdown:'toggleFullscreen'},title:'fullscreen'},'x'),
 		//v('button',{title:'settings'},'='),
 		v('button',{data:{pointerdown:'tabNew'},title:'new tab'},'+'),
@@ -58,4 +58,4 @@ output.tabs=function({state,shadowRoot:root})
 	.reverse()//add last items first since they are getting prepended
 	.forEach(el=>form.append(el))
 }
-export default silo
+export default Object.assign(silo,{output})
