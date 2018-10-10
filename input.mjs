@@ -1,6 +1,6 @@
-import silo from './output.mjs'
-const {config,logic,output,util,v}=silo
-function input(evt)
+import silo from './logic.mjs'
+const {config,logic,util}=silo
+function input(evt)//@todo use default input handler
 {
 	const
 	{target,type}=evt,
@@ -13,9 +13,9 @@ function input(evt)
 	editor=evt.path.find(x=>(x.tagName||'').toLowerCase()==='tabbed-editor'),
 	fn=el.getAttribute(attr),
 	evt2emit=input[fn](evt,editor)
-
-	output.rerender(editor)
-	if(evt2emit) output.event(editor,evt2emit)
+	//@todo refactor these into output
+	silo.output.rerender(editor)
+	if(evt2emit) silo.output.event(editor,evt2emit)
 }
 Object.assign(silo,{input})
 input.tabClose=function(evt,editor)
@@ -46,4 +46,4 @@ input.toggleFullscreen=function(evt,editor)
 	editor.setAttribute('fullscreen',fullscreen)
 	return {detail:{fullscreen},type:'fullscreen'}
 }
-export default silo
+export default Object.assign(silo,{input})//@todo use default handler	 export default silo
