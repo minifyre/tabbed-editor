@@ -11,11 +11,8 @@ function input(evt)//@todo use default input handler
 
 	const//@todo clean up evt2editor code
 	editor=evt.path.find(x=>(x.tagName||'').toLowerCase()==='tabbed-editor'),
-	fn=el.getAttribute(attr),
-	evt2emit=input[fn](evt,editor)
-	//@todo refactor these into output
-	silo.output.rerender(editor)
-	if(evt2emit) silo.output.event(editor,evt2emit)
+	fn=el.getAttribute(attr)
+	return input[fn](evt,editor)
 }
 Object.assign(silo,{input})
 input.tabClose=function(evt,editor)
