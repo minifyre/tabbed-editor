@@ -6,20 +6,15 @@ function output(editor)
 {
 	const
 	{fullscreen,tab,tabs}=editor.state,
-	pointerdown=function(evt)
+	pointerdown=function(evt,editor=util.evt2customEl(evt))
 	{
-		const
-		evt2emit=input(evt),
-		editor=util.evt2customEl(evt)
-
+		const evt2emit=input(evt)
 		editor.render()
-
 		if(evt2emit) output.event(editor,evt2emit)
 	}
 	return [v('style',{},config.css),
 		v('header',{data:{fullscreen},on:{pointerdown}},
 			v('button',{data:{pointerdown:'toggleFullscreen'},title:'fullscreen'},'x'),
-			//v('button',{title:'settings'},'='),
 			v('button',{data:{pointerdown:'tabNew'},title:'new tab'},'+'),
 			v('.tabs',{},
 				...tabs.map(function({id,name})
