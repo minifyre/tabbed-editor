@@ -1,4 +1,5 @@
-const config={}
+import silo from './node_modules/pane-viewer/index.mjs'
+const {config}=silo
 config.state=
 {
 	fullscreen:false,
@@ -6,4 +7,4 @@ config.state=
 	tabs:[],
 	type:'tabbed-editor'
 }
-export default config
+export default silo
