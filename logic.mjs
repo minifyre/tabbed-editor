@@ -1,5 +1,5 @@
 import silo from './util.mjs'
-const {config,logic,util}=silo
+const {config,util}=silo
 function logic(opts={})
 {
 	const state=util.mk(silo.config.state,opts)
