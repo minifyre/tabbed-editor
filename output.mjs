@@ -5,7 +5,8 @@ const
 function output(editor)
 {
 	const
-	{fullscreen,tab,tabs}=editor.state,
+	{tabs}=editor.state.file,
+	{fullscreen,tab}=editor.state.view,
 	pointerdown=function(evt,editor=util.evt2customEl(evt))
 	{
 		const evt2emit=input(evt)
