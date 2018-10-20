@@ -11,7 +11,7 @@ tabbed.editor=class extends silo.viewer
 {
 	constructor(state={})
 	{
-		super(state)
+		super()
 		this.state=logic(state)
 		this.render=v.render(this.shadowRoot,this,output)
 	}
