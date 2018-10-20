@@ -4,7 +4,7 @@ const
 {truth,v}=util
 export default async function tabbed(url='/node_modules/tabbed-editor/')
 {
-	await silo(url,'tabbed-editor',tabbed.editor)
+	await util.mkCustomEl(url,'tabbed-editor',tabbed.editor)
 }
 Object.assign(tabbed,silo)
 tabbed.editor=class extends silo.viewer
