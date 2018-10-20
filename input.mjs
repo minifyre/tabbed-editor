@@ -4,7 +4,7 @@ input.tabClose=function(evt,editor)
 {
 	const
 	{id}=util.findParent(evt.target,'.tab'),
-	switchTabs=editor.state.tab===id,
+	switchTabs=editor.state.view.tab===id,
 	detail={close:id},
 	newlyOpenedTabId=logic.tabClose(editor.state,id)
 
@@ -15,7 +15,7 @@ input.tabClose=function(evt,editor)
 input.tabNew=function(evt,editor)
 {
 	logic.tabNew(editor.state)
-	return {detail:{open:editor.state.tab},type:'tab'}
+	return {detail:{open:editor.state.view.tab},type:'tab'}
 }
 input.tabSwitch=function(evt,editor)
 {
