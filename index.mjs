@@ -21,10 +21,10 @@ tabbed.editor=class extends silo.viewer
 	}
 	get fullscreen()
 	{
-		return !!this.state.fullscreen
+		return !!this.state.view.fullscreen
 	}
 	set fullscreen(val)
 	{
-		return this.state.fullscreen=!!val
+		return this.state.view.fullscreen=!!val
 	}
 }
