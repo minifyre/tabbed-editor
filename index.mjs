@@ -9,11 +9,12 @@ export default async function tabbed(url='/node_modules/tabbed-editor/')
 Object.assign(tabbed,silo)
 tabbed.editor=class extends silo.viewer
 {
-	constructor(state={})
+	constructor(opts)
 	{
 		super()
-		this.state=logic(state)
-		this.render=v.render(this.shadowRoot,this,output)
+		const {state,post}=truth(logic(opts))
+		this.state=state
+		post.push(this.render=v.render(this.shadowRoot,this,output))
 	}
 	static get observedAttributes()
 	{

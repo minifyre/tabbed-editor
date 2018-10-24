@@ -4,6 +4,7 @@ const
 {v}=util
 function output(editor)
 {
+	if(!editor.state) return []
 	const
 	{tabs}=editor.state.file,
 	{fullscreen,tab}=editor.state.view,
