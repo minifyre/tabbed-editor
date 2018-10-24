@@ -2,7 +2,7 @@ import silo from './util.mjs'
 const {config,util}=silo
 function logic(opts={})
 {
-	const state=util.mk(silo.config.state,opts)
+	const state=util.mkState(opts)
 	if(!state.file.tabs.length) state.file.tabs.push({id:util.id(),name:'untitled'})
 	if(!state.view.tab) state.view.tab=state.file.tabs[0].id
 	return state
