@@ -8,7 +8,7 @@ input.tabClose=function(evt,editor)
 	detail={close:id},
 	newlyOpenedTabId=logic.tabClose(editor.state,id)
 
-	if (switchTabs) detail.open=newlyOpenedTabId
+	if(switchTabs) detail.open=newlyOpenedTabId
 
 	return {detail,type:'tab'}
 }

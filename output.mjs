@@ -14,7 +14,9 @@ function output(editor)
 			v('button',{data:{pointerdown:'toggleFullscreen'},title:'fullscreen'},'x'),
 			v('button',{data:{pointerdown:'tabNew'},title:'new tab'},'+'),
 			v('.tabs',{},
-				...tabs.map(function({id,name})
+				...tabs
+				.filter(x=>!!x)//before array length changes, there is an empty element on the end
+				.map(function({id,name})
 				{
 					const classes=tab===id?'selected':''
 					return v('.tab',{class:classes,data:{pointerdown:'tabSwitch'},id},
