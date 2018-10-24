@@ -4,18 +4,13 @@ const
 {v}=util
 function output(editor)
 {
-	if(!editor.state) return []
 	const
 	{tabs}=editor.state.file,
 	{fullscreen,tab}=editor.state.view,
-	pointerdown=function(evt,editor=util.evt2customEl(evt))
-	{
-		const evt2emit=input(evt)
-		editor.render()
-		if(evt2emit) output.event(editor,evt2emit)
-	}
+	on={pointerdown:evt=>output.event(editor,input(evt))}
+
 	return [v('style',{},config.css),
-		v('header',{data:{fullscreen},on:{pointerdown}},
+		v('header',{data:{fullscreen},on},
 			v('button',{data:{pointerdown:'toggleFullscreen'},title:'fullscreen'},'x'),
 			v('button',{data:{pointerdown:'tabNew'},title:'new tab'},'+'),
 			v('.tabs',{},
@@ -34,5 +29,5 @@ function output(editor)
 		)
 	]
 }
-output.event=(el,evt)=>el.dispatchEvent(new CustomEvent(evt.type,evt))
+output.event=(el,evt)=>evt&&el.dispatchEvent(new CustomEvent(evt.type,evt))
 export default Object.assign(silo,{output})
