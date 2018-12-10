@@ -1,8 +1,5 @@
-import silo from './util.mjs'
-const {config,util}=silo
-function logic(opts={})
+logic.normalize=function(state)
 {
-	const state=util.mkState(opts)
 	if(!state.file.tabs.length) state.file.tabs.push({id:util.id(),name:'untitled'})
 	if(!state.view.tab) state.view.tab=state.file.tabs[0].id
 	return state
@@ -38,4 +35,3 @@ logic.tabSwitch=function(state,id)
 	return newTab
 }
 logic.toggleFullscreen=state=>state.view.fullscreen=!state.view.fullscreen
-export default Object.assign(silo,{logic})

@@ -1,8 +1,4 @@
-import silo from './input.mjs'
-const
-{config,input,logic,util}=silo,
-{v}=util
-function output(editor)
+output.render=function(editor)
 {
 	const
 	{tabs}=editor.state.file,
@@ -34,4 +30,3 @@ function output(editor)
 	]
 }
 output.event=(el,evt)=>el.dispatchEvent(new CustomEvent(evt.type,evt))
-export default Object.assign(silo,{output})

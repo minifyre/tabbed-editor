@@ -1,5 +1,3 @@
-import silo from './logic.mjs'
-const {config,input,logic,util}=silo
 input.tabClose=function(evt,editor)
 {
 	const
@@ -28,4 +26,3 @@ input.toggleFullscreen=function(evt,editor)
 	editor.setAttribute('fullscreen',fullscreen)
 	return {detail:{fullscreen},type:'fullscreen'}
 }
-export default silo
