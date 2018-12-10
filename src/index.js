@@ -1,13 +1,14 @@
-import silo from './output.mjs'
-const
-{config,input,logic,output,util}=silo,
-{truth,v}=util
-export default async function tabbed(url='/node_modules/tabbed-editor/')
+import silo from './node_modules/silo/index.js'
+import truth from './node_modules/truth/truth.mjs'
+import v from './node_modules/v/v.mjs'
+
+const {config,util,logic,output,input}=silo
+
+export default silo(async function tabbed(url='/node_modules/tabbed-editor/')
 {
 	await util.mkCustomEl(url,'tabbed-editor',tabbed.editor)
-}
-Object.assign(tabbed,silo)
-tabbed.editor=class extends silo.viewer
+})
+tabbed.editor=class extends silo.customElement
 {
 	constructor(state={})
 	{
