@@ -9,7 +9,7 @@ output.render=function(editor)
 		editor.render()
 		if(evt2emit) output.event(editor,evt2emit)
 	}
-	return [v('style',{},config.css),
+	return [v('style',{},config.style),
 		v('header',{data:{fullscreen},on:{pointerdown}},
 			v('button',{data:{pointerdown:'toggleFullscreen'},title:'fullscreen'},'x'),
 			v('button',{data:{pointerdown:'tabNew'},title:'new tab'},'+'),
