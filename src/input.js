@@ -1,4 +1,4 @@
-input.tabClose=function(evt,editor)
+input.tabClose=function(editor,evt)
 {
 	const
 	{id}=util.findParent(evt.target,'.tab'),
@@ -10,17 +10,17 @@ input.tabClose=function(evt,editor)
 
 	return {detail,type:'tab'}
 }
-input.tabNew=function(evt,editor)
+input.tabNew=function(editor,evt)
 {
 	logic.tabNew(editor.state)
 	return {detail:{open:editor.state.view.tab},type:'tab'}
 }
-input.tabSwitch=function(evt,editor)
+input.tabSwitch=function(editor,evt)
 {
 	const {id}=util.findParent(evt.target,'.tab')
 	if(logic.tabSwitch(editor.state,id)) return {detail:{open:id},type:'tab'}
 }
-input.toggleFullscreen=function(evt,editor)
+input.toggleFullscreen=function(editor,evt)
 {
 	const fullscreen=logic.toggleFullscreen(editor.state)
 	editor.setAttribute('fullscreen',fullscreen)

@@ -5,7 +5,7 @@ output.render=function(editor)
 	{fullscreen,tab}=editor.state.view,
 	pointerdown=function(evt,editor=util.evt2customEl(evt))
 	{
-		const evt2emit=input(evt)
+		const evt2emit=input(editor,evt)
 		editor.render()
 		if(evt2emit) output.event(editor,evt2emit)
 	}
