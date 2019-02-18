@@ -1,3 +1,4 @@
+output.event=(el,evt)=>el.dispatchEvent(new CustomEvent(evt.type,evt))
 output.render=function(editor)
 {
 	const
@@ -38,4 +39,3 @@ output.render=function(editor)
 		)
 	]
 }
-output.event=(el,evt)=>el.dispatchEvent(new CustomEvent(evt.type,evt))
