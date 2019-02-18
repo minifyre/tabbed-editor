@@ -1,6 +1,3 @@
-input.changeAppType=function(sandbox,evt)
-{
-}
 input.tabClose=function(editor,evt)
 {
 	const
@@ -23,6 +20,9 @@ input.tabSwitch=function(editor,evt)
 	const {id}=util.findParent(evt.target,'.tab')
 	if(logic.tabSwitch(editor.state,id)) return {detail:{open:id},type:'tab'}
 }
+//@todo there is some sort of bug going on here
+// Failed to construct 'CustomEvent': parameter 2 ('eventInitDict') is not an object
+input.toggleAppSelection=sandbox=>logic.toggleAppSelection(sandbox.state)
 input.toggleFullscreen=function(editor,evt)
 {
 	const fullscreen=logic.toggleFullscreen(editor.state)
