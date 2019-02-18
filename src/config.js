@@ -131,9 +131,10 @@ config.style=`
 		{
 			content:attr(data-app);
 			bottom:-1.25rem;
-			left:0;
+			font-size:0.8rem;
+			left:-0.25rem;
 			position:absolute;
 			text-align:center;
-			width:100%;
+			width:calc(100% + 0.5rem);
 		}
 `
