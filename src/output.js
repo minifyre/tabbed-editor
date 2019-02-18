@@ -29,13 +29,25 @@ output.render=function(editor)
 		),
 		v('main',{},
 			v('slot'),
-			v('.app-drawer',editor.state.view.toggleType?{}:{hidden:'hidden'},
-				...Object.entries(config.apps)
-				.map(function([app,url])
-				{
-					return v('.app',{data:{app},style:`background-image:url(${url}icon.svg)`})
-				})
-			)
+			output.appDrawer(editor)
 		)
 	]
+}
+output.appDrawer=function(sandbox)
+{
+	const attrs={on:{pointerup:curry(input.toggleAppSelection,sandbox)}}
+
+	if(sandbox.state.view.toggleType) attrs.hidden='hidden'
+
+	return v('.app-drawer',attrs,
+		...Object.entries(config.apps)
+		.map(function([app,url])
+		{
+			const
+			style=`background-image:url(${url}icon.svg)`,
+			pointerup=curry(input.appSwitch,sandbox)
+
+			return v('.app',{data:{app},on:{pointerup},style})
+		})
+	)
 }
