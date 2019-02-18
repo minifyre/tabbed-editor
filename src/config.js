@@ -103,9 +103,37 @@ config.style=`
         position:fixed;
         width:100%;
     }
-	::slotted(*)
+	::slotted(*),.app-drawer
 	{
 		position:absolute;
 		height:100%;
 		width:100%;
-	}`
+	}
+	.app-drawer
+	{
+		padding:0.5rem;
+	}
+		.app
+		{
+			background-size:100% auto;
+			background-position:center;
+			background-repeat:no-repeat;
+			float:left;
+			display:flex;
+			height:4rem;
+			margin:0.5rem;
+			margin-bottom:1.5rem;
+			position:relative;
+			text-align:center;
+			width:4rem;
+		}
+		.app::after
+		{
+			content:attr(data-app);
+			bottom:-1.25rem;
+			left:0;
+			position:absolute;
+			text-align:center;
+			width:100%;
+		}
+`

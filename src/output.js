@@ -28,8 +28,12 @@ output.render=function(editor)
 		),
 		v('main',{},
 			v('slot'),
-			v('aside',editor.state.view.toggleType?{}:{hidden:'hidden'},
-				...Object.keys(config.apps).map(app=>v('div',{},app))
+			v('.app-drawer',editor.state.view.toggleType?{}:{hidden:'hidden'},
+				...Object.entries(config.apps)
+				.map(function([app,url])
+				{
+					return v('.app',{data:{app},style:`background-image:url(${url}icon.svg)`})
+				})
 			)
 		)
 	]
