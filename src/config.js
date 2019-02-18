@@ -137,4 +137,8 @@ config.style=`
 			text-align:center;
 			width:calc(100% + 0.5rem);
 		}
+		.app:hover
+		{
+			cursor:pointer;
+		}
 `
