@@ -9,6 +9,7 @@ output.render=function(editor)
 		editor.render()
 		if(evt2emit) output.event(editor,evt2emit)
 	}
+
 	return [v('style',{},config.style),
 		v('header',{data:{fullscreen},on:{pointerdown}},
 			v('button',{data:{pointerdown:'toggleAppSelection'},title:'change app type'},'::'),
@@ -26,7 +27,10 @@ output.render=function(editor)
 			)
 		),
 		v('main',{},
-			v('slot')
+			v('slot'),
+			v('aside',editor.state.view.toggleType?{}:{hidden:'hidden'},
+				...Object.keys(config.apps).map(app=>v('div',{},app))
+			)
 		)
 	]
 }

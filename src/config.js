@@ -1,3 +1,4 @@
+config.apps={}
 config.state=
 {
 	file:
