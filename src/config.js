@@ -8,6 +8,7 @@ config.state=
 	{
 		fullscreen:false,
 		tab:null,
+		toggleType:false,
 		type:'tabbed-editor'
 	}
 }

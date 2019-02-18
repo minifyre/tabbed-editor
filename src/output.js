@@ -11,6 +11,7 @@ output.render=function(editor)
 	}
 	return [v('style',{},config.style),
 		v('header',{data:{fullscreen},on:{pointerdown}},
+			v('button',{data:{pointerdown:'changeAppType'},title:'change app type'},'::'),
 			v('button',{data:{pointerdown:'toggleFullscreen'},title:'fullscreen'},'x'),
 			v('button',{data:{pointerdown:'tabNew'},title:'new tab'},'+'),
 			v('.tabs',{},

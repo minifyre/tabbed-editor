@@ -1,3 +1,6 @@
+input.changeAppType=function(sandbox,evt)
+{
+}
 input.tabClose=function(editor,evt)
 {
 	const
