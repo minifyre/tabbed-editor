@@ -37,7 +37,7 @@ output.appDrawer=function(sandbox)
 {
 	const attrs={on:{pointerup:curry(input.toggleAppSelection,sandbox)}}
 
-	if(sandbox.state.view.toggleType) attrs.hidden='hidden'
+	if(!sandbox.state.view.showAppDrawer) attrs.hidden='hidden'
 
 	return v('.app-drawer',attrs,
 		...Object.entries(config.apps)

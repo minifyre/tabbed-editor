@@ -7,9 +7,10 @@ config.state=
 	},
 	view:
 	{
+		app:null,
 		fullscreen:false,
+		showAppDrawer:false,
 		tab:null,
-		toggleType:false,
 		type:'tabbed-editor'
 	}
 }

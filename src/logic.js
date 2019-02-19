@@ -34,5 +34,5 @@ logic.tabSwitch=function(state,id)
 	if(newTab) state.view.tab=id
 	return newTab
 }
-logic.toggleAppSelection=state=>state.view.toggleType=!state.view.toggleType
+logic.toggleAppSelection=state=>state.view.showAppDrawer=!state.view.showAppDrawer
 logic.toggleFullscreen=state=>state.view.fullscreen=!state.view.fullscreen
