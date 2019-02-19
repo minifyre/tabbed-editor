@@ -13,11 +13,13 @@ output.render=function(editor)
 
 	return [v('style',{},config.style),
 		v('header',{data:{fullscreen},on:{pointerdown}},
-			v('button',{data:{pointerdown:'toggleAppSelection'},title:'change app type'},'::'),
+			v('button',{data:{pointerdown:'toggleAppSelection'},title:'change app type'},': :'),
 			v('button',{data:{pointerdown:'toggleFullscreen'},title:'fullscreen'},'x'),
 			v('button',{data:{pointerdown:'tabNew'},title:'new tab'},'+'),
 			v('.tabs',{},
-				...tabs.map(function({id,name})
+				...tabs
+				.filter(x=>!!x)
+				.map(function({id,name})
 				{
 					const classes=tab===id?'selected':''
 					return v('.tab',{class:classes,data:{pointerdown:'tabSwitch'},id},
@@ -35,7 +37,7 @@ output.render=function(editor)
 }
 output.appDrawer=function(sandbox)
 {
-	const attrs={on:{pointerup:curry(input.toggleAppSelection,sandbox)}}
+	const attrs={}
 
 	if(!sandbox.state.view.showAppDrawer) attrs.hidden='hidden'
 

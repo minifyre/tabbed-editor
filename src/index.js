@@ -16,8 +16,11 @@ silo.editor=class extends silo.customElement
 	constructor(state={})
 	{
 		super()
-		this.state=logic(state)
-		this.render=v.render(this.shadowRoot,this,output)
+
+		let renderer=x=>x
+
+		this.state=truth(logic(state),(...args)=>renderer(args)).state
+		this.render=renderer=v.render(this.shadowRoot,this,output)
 	}
 	static get observedAttributes()
 	{
