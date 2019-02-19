@@ -29,6 +29,8 @@ config.style=`
 		background:#ccc;
 		display:flex;
 		flex-direction:row;
+		padding-left:0.25rem;
+		padding-top:0.25rem;
 	}
 		header button
 		{
@@ -37,6 +39,7 @@ config.style=`
 			background:#fff;
 			height:1rem;
 			margin:0.25rem;
+			padding:0.1rem;
 			user-select:none;
 			width:1rem;
 		}
