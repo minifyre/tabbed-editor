@@ -9,7 +9,8 @@ output.render=function(editor)
 		const evt2emit=input(editor,evt)
 		editor.render()
 		if(evt2emit) output.event(editor,evt2emit)
-	}
+	},
+	app=v(editor.state.view.app||'div')
 
 	return [v('style',{},config.style),
 		v('header',{data:{fullscreen},on:{pointerdown}},
@@ -30,7 +31,7 @@ output.render=function(editor)
 			)
 		),
 		v('main',{},
-			v('slot'),
+			v('slot',{},app),
 			output.appDrawer(editor)
 		)
 	]
