@@ -10,7 +10,7 @@ output.render=function(editor)
 		editor.render()
 		if(evt2emit) output.event(editor,evt2emit)
 	},
-	app=v(editor.state.view.app||'div')
+	app=v(editor.state.view.app||'div',{style:'height:100%; width:100%;'})
 
 	return [v('style',{},config.style),
 		v('header',{data:{fullscreen},on:{pointerdown}},
