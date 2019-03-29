@@ -96,7 +96,7 @@ config.style=`
 	main
 	{
 		display:flex;
-		height:calc(100% - 1.5rem);/*@todo fix this!*/
+		height:calc(100% - 1.75rem);/*@todo fix this!*/
 		position:relative;
 		flex:1 1 auto;/*@todo not working!*/
 		width:100%;
