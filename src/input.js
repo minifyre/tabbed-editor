@@ -6,11 +6,14 @@ input.appSwitch=async function(sandbox,evt)
 	app=evt.target.getAttribute('data-app'),
 	url=config.apps[app]
 
-	if(typeof url!=='string') sandbox.state.view.app=app
+	if(typeof url==='string')
+	{
+		const {default:lib}=await import(url+'index.js')
 
-	const {default:lib}=await import(url+'index.js')
+		await lib()
 
-	await lib()
+		config.apps[app]=lib
+	}
 
 	sandbox.state.view.app=app
 }
