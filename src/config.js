@@ -107,8 +107,15 @@ config.style=`
         position:fixed;
         width:100%;
     }
-	::slotted(*),.app-drawer
+	.app-drawer
 	{
+		position:absolute;
+		height:100%;
+		width:100%;
+	}
+	::slotted(*),slot
+	{
+		display:flex;
 		position:absolute;
 		height:100%;
 		width:100%;
