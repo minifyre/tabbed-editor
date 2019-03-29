@@ -28,6 +28,7 @@ config.style=`
 	{
 		background:#ccc;
 		display:flex;
+		height:1.5rem;
 		flex-direction:row;
 		padding-left:0.25rem;
 		padding-top:0.25rem;
@@ -94,11 +95,10 @@ config.style=`
 				}
 	main
 	{
-		background:#333;
 		display:flex;
+		height:calc(100% - 1.5rem);/*@todo fix this!*/
 		position:relative;
-		flex:1 1 auto;
-		height:auto;
+		flex:1 1 auto;/*@todo not working!*/
 		width:100%;
 	}
 	header[data-fullscreen="true"]+main
