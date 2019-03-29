@@ -4,18 +4,19 @@ input.appSwitch=async function(sandbox,evt)
 
 	const
 	app=evt.target.getAttribute('data-app'),
-	url=config.apps[app]
+	{lib,src}=config.apps[app]
 
-	if(typeof url==='string')
+	if(!lib)
 	{
-		const {default:lib}=await import(url+'index.js')
+		const {default:lib}=await import(src+'index.js')
 
 		await lib()
 
-		config.apps[app]=lib
+		config.apps[app].lib=lib
 	}
 
 	sandbox.state.view.app=app
+	//@todo update all pane tab views
 }
 
 input.tabClose=function(editor,evt)

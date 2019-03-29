@@ -44,10 +44,10 @@ output.appDrawer=function(sandbox)
 
 	return v('.app-drawer',attrs,
 		...Object.entries(config.apps)
-		.map(function([app,url])
+		.map(function([app,{src}])
 		{
 			const
-			style=`background-image:url(${url}icon.svg)`,
+			style=`background-image:url(${src}icon.svg)`,
 			pointerup=curry(input.appSwitch,sandbox)
 
 			return v('.app',{data:{app},on:{pointerup},style})
