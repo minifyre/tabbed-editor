@@ -10,11 +10,14 @@ output.render=function(editor)
 		editor.render()
 		if(evt2emit) output.event(editor,evt2emit)
 	},
-	app=v(editor.state.view.app||'div',{style:'height:100%; width:100%;'})
+	app=v(editor.state.view.app||'div',{style:'height:100%; width:100%;'}),
+	//@todo the line below is fragile if not used in the node_modules setup
+	type=editor.state.view.app?`${editor.state.view.app}`:'tabbed-editor',
+	style=`background-image:url(./node_modules/${type}/icon.svg);`
 
 	return [v('style',{},config.style),
 		v('header',{data:{fullscreen},on:{pointerdown}},
-			v('button',{data:{pointerdown:'toggleAppSelection'},title:'change app type'},': :'),
+			v('button.type',{data:{pointerdown:'toggleAppSelection'},style,title:'change app type'}),
 			v('button',{data:{pointerdown:'toggleFullscreen'},title:'fullscreen'},'x'),
 			v('button',{data:{pointerdown:'tabNew'},title:'new tab'},'+'),
 			v('.tabs',{},

@@ -37,12 +37,18 @@ config.style=`
 		{
 			border:0;
 			border-radius:0;
-			background:#fff;
+			background-color:#fff;
+			background-size:100% 100%;
+			background-positon:center;
 			height:1rem;
 			margin:0.25rem;
 			padding:0.1rem;
 			user-select:none;
 			width:1rem;
+		}
+		header button.type
+		{
+			border-radius:25%;
 		}
 		header[data-fullscreen="true"] [data-pointerdown="toggleFullscreen"]
 		{
